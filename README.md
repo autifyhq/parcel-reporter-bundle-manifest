@@ -20,7 +20,7 @@ Add `parcel-reporter-bundle-manifest` to `.parcelrc` in `reporters`.
 ```json
 {
   "extends": "@parcel/config-default",
-  "reporters": ["parcel-reporter-bundle-manifest"]
+  "reporters": ["...", "parcel-reporter-bundle-manifest"]
 }
 ```
 
