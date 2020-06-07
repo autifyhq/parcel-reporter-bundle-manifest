@@ -22,10 +22,7 @@ test('parcel-nightly', async () => {
 })
 
 async function buildAndAssertManifestFile() {
-  const { stderr } = await exec('rm -rf .parcel-cache dist node_modules && npm install && npm run build')
-  if (stderr) {
-    throw new Error(stderr)
-  }
+  await exec('rm -rf .parcel-cache dist node_modules && npm install && npm run build')
   const parcelManifest = JSON.parse(fs.readFileSync('./dist/parcel-manifest.json').toString())
   expect(parcelManifest).toMatchSnapshot()
 }
