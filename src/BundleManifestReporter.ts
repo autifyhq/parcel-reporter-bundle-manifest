@@ -23,7 +23,7 @@ export default new Reporter({
     }
 
     for (let [targetDir, bundles] of bundlesByTarget) {
-      let manifest: { [assetName: string]: string } = {}
+      let manifest: Manifest = {}
 
       for (let bundle of bundles) {
         const assetPath = bundle.getMainEntry().filePath
@@ -31,7 +31,10 @@ export default new Reporter({
         manifest[assetName] = bundle.name
       }
 
-      await options.outputFS.writeFile(`${targetDir}/parcel-manifest.json`, JSON.stringify(manifest))
+      await options.outputFS.writeFile(`${targetDir}/${MANIFEST_FILENAME}`, JSON.stringify(manifest))
     }
   }
 })
+
+export type Manifest = { [assetName: string]: string }
+export const MANIFEST_FILENAME = 'parcel-manifest.json'

@@ -1,14 +1,15 @@
-import { exec as execBeforePromisify } from 'child_process'
+import { exec } from 'child_process'
 import util from 'util'
 import fs from 'fs'
 import path from 'path'
+import { MANIFEST_FILENAME, Manifest } from '../src/BundleManifestReporter'
 
-const exec = util.promisify(execBeforePromisify)
+const promisifiedExec = util.promisify(exec)
 
 jest.setTimeout(120000)
 
 beforeAll(() => {
-  return exec('npm run build')
+  return promisifiedExec('npm run build')
 })
 
 test('parcel-alpha', async () => {
@@ -22,7 +23,23 @@ test('parcel-nightly', async () => {
 })
 
 async function buildAndAssertManifestFile() {
-  await exec('rm -rf .parcel-cache dist node_modules && npm install && npm run build')
-  const parcelManifest = JSON.parse(fs.readFileSync('./dist/parcel-manifest.json').toString())
-  expect(parcelManifest).toMatchSnapshot()
+  await promisifiedExec('rm -rf .parcel-cache dist node_modules && npm install && npm run build')
+  const parcelManifest = JSON.parse(fs.readFileSync(`./dist/${MANIFEST_FILENAME}`).toString())
+  const filenames = fs.readdirSync('./dist')
+
+  const expected: Manifest = {}
+  for (let filename of filenames) {
+    if (filename === MANIFEST_FILENAME || filename.includes('.map')) {
+      continue
+    }
+    const splittedFileName = filename.split('.')
+    if (splittedFileName.length > 2) {
+      const filenameWithoutHash = splittedFileName.filter((_, index) => index !== splittedFileName.length - 2).join('.')
+      expected[filenameWithoutHash] = filename
+    } else {
+      expected[filename] = filename
+    }
+  }
+
+  expect(parcelManifest).toEqual(expected)
 }
