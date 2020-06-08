@@ -1,6 +1,6 @@
 {
   "name": "parcel-reporter-bundle-manifest",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "https://github.com/mugi-uno/parcel-plugin-bundle-manifest, but for Parcel 2",
   "scripts": {
     "build": "parcel build src/BundleManifestReporter.ts",
