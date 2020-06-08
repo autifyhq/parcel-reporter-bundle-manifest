@@ -35,9 +35,9 @@ async function buildAndAssertManifestFile() {
     const splittedFileName = filename.split('.')
     if (splittedFileName.length > 2) {
       const filenameWithoutHash = splittedFileName.filter((_, index) => index !== splittedFileName.length - 2).join('.')
-      expected[filenameWithoutHash] = filename
+      expected[filenameWithoutHash] = '/' + filename
     } else {
-      expected[filename] = filename
+      expected[filename] = '/' + filename
     }
   }
 

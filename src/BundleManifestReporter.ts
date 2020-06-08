@@ -28,7 +28,7 @@ export default new Reporter({
       for (let bundle of bundles) {
         const assetPath = bundle.getMainEntry().filePath
         const assetName = path.basename(assetPath)
-        manifest[assetName] = bundle.name
+        manifest[assetName] = '/' + bundle.name
       }
 
       await options.outputFS.writeFile(`${targetDir}/${MANIFEST_FILENAME}`, JSON.stringify(manifest))
