@@ -3,10 +3,10 @@
 This will add `parcel-manifest.json` to the target dir. Example:
 ```json
 {
-  "index.html": "index.html",
-  "layout.css": "layout.f955332a.css",
-  "editor.css": "editor.e1160f52.css",
-  "editor.tsx": "editor.9099e93e.js"
+  "index.html": "/index.html",
+  "layout.css": "/layout.f955332a.css",
+  "editor.css": "/editor.e1160f52.css",
+  "editor.tsx": "/editor.9099e93e.js"
 }
 ```
 
