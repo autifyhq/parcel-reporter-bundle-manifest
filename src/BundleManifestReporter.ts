@@ -6,8 +6,8 @@ const normalisePath = (p: string) => {
 };
 
 export default new Reporter({
+  // TODO: Add type definition for Reporter
   async report({ event, options }: any) {
-    // TODO: Add type definition for Reporter
     if (event.type !== 'buildSuccess') {
       return;
     }
