@@ -30,4 +30,9 @@ Add `parcel-reporter-bundle-manifest` to `.parcelrc` in `reporters`.
 
 ## Acknowledgement
 
-This plugin behave similarly to https://github.com/mugi-uno/parcel-plugin-bundle-manifest. 
+This plugin behave similarly to https://github.com/mugi-uno/parcel-plugin-bundle-manifest.
+
+## License
+
+parcel-reporter-bundle-manifest © [Autify Engineers](https://github.com/autifyhq). Released under the [MIT License](LICENSE).<br/>
+Authored and maintained by [Autify Engineers](https://github.com/autifyhq) with help from [contributors](https://github.com/autifyhq/parcel-reporter-bundle-manifest/graphs/contributors).
