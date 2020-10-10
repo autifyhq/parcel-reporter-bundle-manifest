@@ -1,1 +1,1 @@
-declare module '@parcel/plugin'
+declare module "@parcel/plugin"

@@ -1,1 +1,1 @@
-declare module '@parcel/config-default'
+declare module "@parcel/config-default"

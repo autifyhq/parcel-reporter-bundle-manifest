@@ -1,52 +1,56 @@
-import { Reporter } from '@parcel/plugin';
-import path from 'path';
+import { Reporter } from "@parcel/plugin"
+import path from "path"
 
 const normalisePath = (p: string) => {
-  return p.replace(/[\\/]+/g, '/');
-};
+  return p.replace(/[\\/]+/g, "/")
+}
 
 export default new Reporter({
   // TODO: Add type definition for Reporter
   async report({ event, options }: any) {
-    if (event.type !== 'buildSuccess') {
-      return;
+    if (event.type !== "buildSuccess") {
+      return
     }
 
-    let bundlesByTarget = new Map();
+    let bundlesByTarget = new Map()
 
     for (let bundle of event.bundleGraph.getBundles()) {
       if (!bundle.isInline) {
-        let bundles = bundlesByTarget.get(bundle.target.distDir);
+        let bundles = bundlesByTarget.get(bundle.target.distDir)
 
         if (!bundles) {
-          bundles = [];
-          bundlesByTarget.set(bundle.target.distDir, bundles);
+          bundles = []
+          bundlesByTarget.set(bundle.target.distDir, bundles)
         }
 
-        bundles.push(bundle);
+        bundles.push(bundle)
       }
     }
 
     for (let [targetDir, bundles] of bundlesByTarget) {
-      let manifest: Manifest = {};
+      let manifest: Manifest = {}
 
       for (let bundle of bundles) {
-        const mainEntry = bundle.getMainEntry();
+        const mainEntry = bundle.getMainEntry()
         if (mainEntry) {
-          const assetPath = mainEntry.filePath;
-          const assetName = normalisePath(path.relative(options.rootDir, assetPath));
-          const bundleUrl = normalisePath(`${bundle.target.publicUrl}/${bundle.name}`);
+          const assetPath = mainEntry.filePath
+          const assetName = normalisePath(
+            path.relative(options.rootDir, assetPath)
+          )
+          const bundleUrl = normalisePath(
+            `${bundle.target.publicUrl}/${bundle.name}`
+          )
 
-          manifest[assetName] = bundleUrl;
+          manifest[assetName] = bundleUrl
         }
       }
 
-      const targetPath = `${targetDir}/${MANIFEST_FILENAME}`;
-      await options.outputFS.writeFile(targetPath, JSON.stringify(manifest));
-      console.log(`📄 Wrote bundle manifest to: ${targetPath}`);
+      const targetPath = `${targetDir}/${MANIFEST_FILENAME}`
+      await options.outputFS.writeFile(targetPath, JSON.stringify(manifest))
+      console.log(`📄 Wrote bundle manifest to: ${targetPath}`)
     }
   },
-});
+})
 
-export type Manifest = { [assetName: string]: string };
-export const MANIFEST_FILENAME = 'parcel-manifest.json';
+export type Manifest = { [assetName: string]: string }
+export const MANIFEST_FILENAME = "parcel-manifest.json"
