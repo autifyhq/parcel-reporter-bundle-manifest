@@ -1,6 +1,7 @@
 # parcel-reporter-bundle-manifest
 
 This will add `parcel-manifest.json` to the target dir. Example:
+
 ```json
 {
   "index.html": "/index.html",
@@ -11,12 +12,15 @@ This will add `parcel-manifest.json` to the target dir. Example:
 ```
 
 ## Installation
+
 ```sh
 npm install --save-dev parcel-reporter-bundle-manifest
 ```
 
 ## Usage
+
 Add `parcel-reporter-bundle-manifest` to `.parcelrc` in `reporters`.
+
 ```json
 {
   "extends": "@parcel/config-default",
@@ -25,6 +29,7 @@ Add `parcel-reporter-bundle-manifest` to `.parcelrc` in `reporters`.
 ```
 
 ## More info:
+
 - https://github.com/parcel-bundler/parcel#parcelrcreporters
 - https://github.com/parcel-bundler/parcel#reporters
 

@@ -1,1 +1,1 @@
-declare module '@parcel/fs'
+declare module "@parcel/fs"

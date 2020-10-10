@@ -1,1 +1,1 @@
-declare module '@parcel/core'
+declare module "@parcel/core"
