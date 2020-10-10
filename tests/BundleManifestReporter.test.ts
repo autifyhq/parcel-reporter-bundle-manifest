@@ -12,8 +12,8 @@ beforeAll(() => {
   return promisifiedExec('npm run build')
 })
 
-test('parcel-alpha', async () => {
-  process.chdir(path.join(__dirname, './fixtures/parcel-alpha'))
+test('parcel-beta', async () => {
+  process.chdir(path.join(__dirname, './fixtures/parcel-beta'))
   await buildAndAssertManifestFile()
 })
 

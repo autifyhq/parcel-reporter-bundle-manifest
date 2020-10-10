@@ -1,11 +1,11 @@
 {
-  "name": "test-parcel-alpha",
+  "name": "test-parcel-beta",
   "private": true,
   "scripts": {
     "build": "parcel build src/index.html"
   },
   "devDependencies": {
-    "parcel": "2.0.0-alpha.3",
+    "parcel": "2.0.0-beta.1",
     "parcel-reporter-bundle-manifest": "file:../../.."
   }
 }
