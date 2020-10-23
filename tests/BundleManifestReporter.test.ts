@@ -1,15 +1,12 @@
-import { exec } from "child_process"
-import util from "util"
+import { execSync } from "child_process"
 import fs from "fs"
 import path from "path"
 import { MANIFEST_FILENAME, Manifest } from "../src/BundleManifestReporter"
 
-const promisifiedExec = util.promisify(exec)
-
 jest.setTimeout(120000)
 
 beforeAll(() => {
-  return promisifiedExec("npm run build")
+  execSync("npm run build")
 })
 
 test("parcel-beta", async () => {
@@ -23,8 +20,8 @@ test("parcel-nightly", async () => {
 })
 
 async function buildAndAssertManifestFile() {
-  await promisifiedExec(
-    "rm -rf .parcel-cache dist node_modules && npm install && npm run build"
+  execSync(
+    "rm -rf package-lock.json .parcel-cache dist node_modules && npm install && npm run build"
   )
   const parcelManifest = JSON.parse(
     fs.readFileSync(`./dist/${MANIFEST_FILENAME}`).toString()
@@ -38,10 +35,14 @@ async function buildAndAssertManifestFile() {
     }
     const splittedFileName = filename.split(".")
     if (splittedFileName.length > 2) {
-      const filenameWithoutHash = splittedFileName
-        .filter((_, index) => index !== splittedFileName.length - 2)
-        .join(".")
-      expected[filenameWithoutHash] = "/" + filename
+      const sourceMap = JSON.parse(
+        fs.readFileSync(`./dist/${filename}.map`).toString()
+      ) as { sources: string[] }
+      for (const sourcePath of sourceMap.sources) {
+        const splittedSourcePath = sourcePath.split("/")
+        const sourceName = splittedSourcePath[splittedSourcePath.length - 1]
+        expected[sourceName] = "/" + filename
+      }
     } else {
       expected[filename] = "/" + filename
     }
