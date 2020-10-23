@@ -33,6 +33,14 @@ Add `parcel-reporter-bundle-manifest` to `.parcelrc` in `reporters`.
 - https://github.com/parcel-bundler/parcel#parcelrcreporters
 - https://github.com/parcel-bundler/parcel#reporters
 
+## Development
+
+### Releasing
+
+1. Bump the version in `package.json`
+2. Push to the `main` branch in GitHub
+3. Create a release for that version
+
 ## Acknowledgement
 
 This plugin behave similarly to https://github.com/mugi-uno/parcel-plugin-bundle-manifest.
