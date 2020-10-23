@@ -2,3 +2,4 @@
 node_modules/
 lib/
 tests/**/dist/
+tests/**/package-lock.json
