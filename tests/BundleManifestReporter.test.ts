@@ -1,15 +1,12 @@
-import { exec } from "child_process"
-import util from "util"
+import { execSync } from "child_process"
 import fs from "fs"
 import path from "path"
 import { MANIFEST_FILENAME, Manifest } from "../src/BundleManifestReporter"
 
-const promisifiedExec = util.promisify(exec)
-
 jest.setTimeout(120000)
 
 beforeAll(() => {
-  return promisifiedExec("npm run build")
+  execSync("npm run build")
 })
 
 test("parcel-beta", async () => {
@@ -23,7 +20,7 @@ test("parcel-nightly", async () => {
 })
 
 async function buildAndAssertManifestFile() {
-  await promisifiedExec(
+  execSync(
     "rm -rf .parcel-cache dist node_modules && npm install && npm run build"
   )
   const parcelManifest = JSON.parse(
