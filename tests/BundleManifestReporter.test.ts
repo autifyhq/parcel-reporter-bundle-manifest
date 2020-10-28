@@ -38,11 +38,9 @@ async function buildAndAssertManifestFile() {
       const sourceMap = JSON.parse(
         fs.readFileSync(`./dist/${filename}.map`).toString()
       ) as { sources: string[] }
-      for (const sourcePath of sourceMap.sources) {
-        const splittedSourcePath = sourcePath.split("/")
-        const sourceName = splittedSourcePath[splittedSourcePath.length - 1]
-        expected[sourceName] = "/" + filename
-      }
+      const splittedSourcePath = sourceMap.sources[0].split("/")
+      const sourceName = splittedSourcePath[splittedSourcePath.length - 1]
+      expected[sourceName] = "/" + filename
     } else {
       expected[filename] = "/" + filename
     }
