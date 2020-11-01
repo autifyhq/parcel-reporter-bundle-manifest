@@ -1,3 +1,3 @@
-import './styles-js.css'
+import "./styles-js.css"
 
 console.log("1")

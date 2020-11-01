@@ -5,7 +5,8 @@
   "scripts": {
     "build": "parcel build src/BundleManifestReporter.ts",
     "test": "jest",
-    "prepare": "npm run build"
+    "prepare": "npm run build",
+    "format": "prettier --write ."
   },
   "repository": {
     "type": "git",
