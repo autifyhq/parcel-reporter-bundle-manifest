@@ -34,14 +34,14 @@
   },
   "devDependencies": {
     "@types/jest": "^26.0.15",
-    "@types/node": "^14.14.2",
+    "@types/node": "^14.14.6",
     "husky": "^4.3.0",
     "jest": "^26.6.1",
-    "lint-staged": "^10.4.2",
-    "parcel": "^2.0.0-nightly.435",
+    "lint-staged": "^10.5.1",
+    "parcel": "^2.0.0-nightly.438",
     "prettier": "^2.1.2",
-    "ts-jest": "^26.4.2",
-    "typescript": "^4.0.3"
+    "ts-jest": "^26.4.3",
+    "typescript": "^4.0.5"
   },
   "targets": {
     "main": {
