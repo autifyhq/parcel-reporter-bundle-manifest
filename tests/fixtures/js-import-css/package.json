@@ -1,0 +1,11 @@
+{
+  "name": "js-import-css",
+  "private": true,
+  "scripts": {
+    "build": "parcel build src/index.html"
+  },
+  "devDependencies": {
+    "parcel": "2.0.0-nightly.438",
+    "parcel-reporter-bundle-manifest": "file:../../.."
+  }
+}

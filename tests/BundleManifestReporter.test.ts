@@ -19,6 +19,11 @@ test("parcel-nightly", async () => {
   await buildAndAssertManifestFile()
 })
 
+test("js-import-css", async () => {
+  process.chdir(path.join(__dirname, "./fixtures/js-import-css"))
+  await buildAndAssertManifestFile()
+})
+
 async function buildAndAssertManifestFile() {
   execSync(
     "rm -rf package-lock.json .parcel-cache dist node_modules && npm install && npm run build"
