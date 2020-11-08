@@ -31,9 +31,19 @@ export default new Reporter({
       let manifest: Manifest = {}
 
       for (let bundle of bundles) {
-        const mainEntry = bundle.getMainEntry()
-        if (mainEntry) {
-          const assetPath = mainEntry.filePath
+        /**
+         * Only use the first asset of the bundle as the key of the manifest.
+         * 
+         * Some bundle doesn't have a main entry (`bundle.getMainEntry()`); e.g. CSS bundle that's the result of CSS files imported from JS.
+         * 
+         * The bundle could have multiple assets; e.g. multiple CSS files combined into one bundle,
+         * so we only choose the first one to avoid multiple bundle in the manifest.
+         * 
+         * We cannot use the bundled file name without hash as a key because there' might be only hash; e.g. styles.css -> asdfjkl.css.
+         */
+        const asset = bundle.getEntryAssets()[0]
+        if (asset) {
+          const assetPath = asset.filePath
           const assetName = normalisePath(
             // Fallback to rootDir for the current beta version
             // https://github.com/parcel-bundler/parcel/pull/4896 change to entryRoot in the current nightly version
