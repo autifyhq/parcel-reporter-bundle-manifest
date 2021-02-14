@@ -12,9 +12,9 @@ export default new Reporter({
       return
     }
 
-    let bundlesByTarget = new Map()
+    const bundlesByTarget = new Map()
 
-    for (let bundle of event.bundleGraph.getBundles()) {
+    for (const bundle of event.bundleGraph.getBundles()) {
       if (!bundle.isInline) {
         let bundles = bundlesByTarget.get(bundle.target.distDir)
 
@@ -27,18 +27,18 @@ export default new Reporter({
       }
     }
 
-    for (let [targetDir, bundles] of bundlesByTarget) {
-      let manifest: Manifest = {}
+    for (const [targetDir, bundles] of bundlesByTarget) {
+      const manifest: Manifest = {}
 
-      for (let bundle of bundles) {
+      for (const bundle of bundles) {
         /**
          * Use main entry first as the key of the manifest, and fallback to the first asset of the bundle if main entry doesn't exist.
-         * 
+         *
          * Some bundle doesn't have a main entry (`bundle.getMainEntry()`); e.g. CSS bundle that's the result of CSS files imported from JS.
-         * 
+         *
          * The bundle could have multiple assets; e.g. multiple CSS files combined into one bundle,
          * so we only choose the first one to avoid multiple bundle in the manifest.
-         * 
+         *
          * We cannot use the bundled file name without hash as a key because there' might be only hash; e.g. styles.css -> asdfjkl.css.
          */
         const asset = bundle.getMainEntry() ?? bundle.getEntryAssets()[0]

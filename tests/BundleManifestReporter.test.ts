@@ -34,7 +34,7 @@ async function buildAndAssertManifestFile() {
   const filenames = fs.readdirSync("./dist")
 
   const expected: Manifest = {}
-  for (let filename of filenames) {
+  for (const filename of filenames) {
     if (filename === MANIFEST_FILENAME || filename.includes(".map")) {
       continue
     }
