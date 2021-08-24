@@ -45,12 +45,10 @@ export default new Reporter({
         if (asset) {
           const assetPath = asset.filePath
           const assetName = normalisePath(
-            // Fallback to rootDir for the current beta version
-            // https://github.com/parcel-bundler/parcel/pull/4896 change to entryRoot in the current nightly version
-            path.relative(options.entryRoot ?? options.rootDir, assetPath)
+            path.relative(options.projectRoot ?? options.entryRoot ?? options.rootDir, assetPath)
           )
           const bundleUrl = normalisePath(
-            `${bundle.target.publicUrl}/${bundle.name}`
+            `${bundle.target.publicUrl}/${path.relative(bundle.target.distDir, bundle.filePath)}`
           )
 
           manifest[assetName] = bundleUrl
