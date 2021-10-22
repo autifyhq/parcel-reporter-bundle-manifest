@@ -9,13 +9,8 @@ beforeAll(() => {
   execSync("npm run build")
 })
 
-test("parcel-beta", async () => {
-  process.chdir(path.join(__dirname, "./fixtures/parcel-beta"))
-  await buildAndAssertManifestFile()
-})
-
-test("parcel-nightly", async () => {
-  process.chdir(path.join(__dirname, "./fixtures/parcel-nightly"))
+test("parcel", async () => {
+  process.chdir(path.join(__dirname, "./fixtures/parcel"))
   await buildAndAssertManifestFile()
 })
 

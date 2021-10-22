@@ -1,11 +1,11 @@
 {
-  "name": "test-parcel-nightly",
+  "name": "test-parcel",
   "private": true,
   "scripts": {
     "build": "parcel build src/index.html"
   },
   "devDependencies": {
-    "parcel": "2.0.0-nightly.438",
+    "parcel": "2.0.0",
     "parcel-reporter-bundle-manifest": "file:../../.."
   }
 }

@@ -44,11 +44,13 @@ export default new Reporter({
         const asset = bundle.getMainEntry() ?? bundle.getEntryAssets()[0]
         if (asset) {
           const assetPath = asset.filePath
-          const assetName = normalisePath(
-            path.relative(options.projectRoot ?? options.entryRoot ?? options.rootDir, assetPath)
-          )
+          const entryRoot = event.bundleGraph.getEntryRoot(bundle.target)
+          const assetName = normalisePath(path.relative(entryRoot, assetPath))
           const bundleUrl = normalisePath(
-            `${bundle.target.publicUrl}/${path.relative(bundle.target.distDir, bundle.filePath)}`
+            `${bundle.target.publicUrl}/${path.relative(
+              bundle.target.distDir,
+              bundle.filePath
+            )}`
           )
 
           manifest[assetName] = bundleUrl
