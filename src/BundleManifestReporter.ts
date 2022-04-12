@@ -46,12 +46,9 @@ export default new Reporter({
           const assetPath = asset.filePath
           const entryRoot = event.bundleGraph.getEntryRoot(bundle.target)
           const assetName = normalisePath(path.relative(entryRoot, assetPath))
-          const bundleUrl = normalisePath(
-            `${bundle.target.publicUrl}/${path.relative(
-              bundle.target.distDir,
-              bundle.filePath
-            )}`
-          )
+          const bundleUrl =
+            bundle.target.publicUrl +
+            normalisePath(path.relative(bundle.target.distDir, bundle.filePath))
 
           manifest[assetName] = bundleUrl
         }
