@@ -48,6 +48,7 @@ export default new Reporter({
           const assetName = normalisePath(path.relative(entryRoot, assetPath))
           const bundleUrl =
             bundle.target.publicUrl +
+            "/" +
             normalisePath(path.relative(bundle.target.distDir, bundle.filePath))
 
           manifest[assetName] = bundleUrl
@@ -55,7 +56,10 @@ export default new Reporter({
       }
 
       const targetPath = `${targetDir}/${MANIFEST_FILENAME}`
-      await options.outputFS.writeFile(targetPath, JSON.stringify(manifest))
+      await options.outputFS.writeFile(
+        targetPath,
+        JSON.stringify(manifest, null, 2)
+      )
       console.log(`📄 Wrote bundle manifest to: ${targetPath}`)
     }
   },
